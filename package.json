@@ -1,0 +1,51 @@
+{
+  "name": "bdns",
+  "version": "0.0.0",
+  "description": "DNS wrapper for node.js",
+  "keywords": [
+    "dns",
+    "domain",
+    "getaddrinfo",
+    "lookup",
+    "name",
+    "resolution"
+  ],
+  "license": "MIT",
+  "repository": "git://github.com/bcoin-org/bdns.git",
+  "homepage": "https://github.com/bcoin-org/bdns",
+  "bugs": {
+    "url": "https://github.com/bcoin-org/bdns/issues"
+  },
+  "author": "Christopher Jeffrey <chjjeffrey@gmail.com>",
+  "main": "./lib/bdns.js",
+  "scripts": {
+    "browserify": "browserify -s bdns lib/bdns.js | uglifyjs -c > bdns.js",
+    "clean": "rm -f bdns.js",
+    "lint": "eslint lib/ test/ || exit 0",
+    "test": "mocha --reporter spec test/*-test.js",
+    "webpack": "webpack --config webpack.config.js"
+  },
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "browserify": "^14.5.0",
+    "eslint": "^4.9.0",
+    "mocha": "^4.0.1",
+    "uglifyjs-webpack-plugin": "^1.0.0-beta.3",
+    "uglify-es": "^3.1.3",
+    "webpack": "^3.8.1"
+  },
+  "engines": {
+    "node": ">=7.6.0"
+  },
+  "browser": {
+    "./lib/dns": "./lib/dns-browser.js"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  }
+}
