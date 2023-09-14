@@ -12,6 +12,9 @@ describe('DNS', function() {
     const records = await dns.lookup('example.com', null, TIMEOUT);
     assert(records.length > 0);
 
+    const recordsA = await dns.lookup('example.com', 4, TIMEOUT);
+    assert(recordsA.length > 0);
+
     const recordsAAAA = await dns.lookup('example.com', 6, TIMEOUT);
     assert(recordsAAAA.length > 0);
   });
@@ -24,7 +27,12 @@ describe('DNS', function() {
   });
 
   it('should lookupService a name', async () => {
-    const result = await dns.lookupService('127.0.0.1', 80, TIMEOUT);
-    assert(result.hostname === 'localhost');
+    const result = await dns.lookupService('127.0.0.1', 443, TIMEOUT / 2);
+    assert.strictEqual(result.hostname, 'localhost');
+  });
+
+  it('should reverse lookup', async () => {
+    const result = await dns.reverse('1.1.1.1', TIMEOUT);
+    assert(result);
   });
 });
